@@ -19,7 +19,7 @@ enum GameState {
 export class GameManager extends Component {
 
     // 赛道预制
-    @property({type: Prefab})
+    @property({ type: Prefab })
     public cubePrfb: Prefab | null = null;
     // 赛道长度
     @property
@@ -27,13 +27,13 @@ export class GameManager extends Component {
     // 赛道
     private _road: BlockType[] = [];
     // 玩家
-    @property({type: PlayerController})
+    @property({ type: PlayerController })
     public playerCtrl: PlayerController | null = null;
     // play按钮
-    @property({type: Node})
+    @property({ type: Node })
     public startMenu: Node | null = null;
     // 步数
-    @property({type: Label})
+    @property({ type: Label })
     public stepsLabel: Label | null = null;
 
 
@@ -60,7 +60,7 @@ export class GameManager extends Component {
     }
 
     set curState(value: GameState) {
-        switch(value) {
+        switch (value) {
             case GameState.GS_INIT:
                 this.init()
                 break;
@@ -74,7 +74,7 @@ export class GameManager extends Component {
                 // 设置 active 为 true 时会直接开始监听鼠标事件，此时鼠标抬起事件还未派发
                 // 会出现的现象就是，游戏开始的瞬间人物已经开始移动
                 // 因此，这里需要做延迟处理
-                setTimeout(()=>{
+                setTimeout(() => {
                     if (this.playerCtrl) {
                         this.playerCtrl.setInputActive(true);
                     }
@@ -103,7 +103,7 @@ export class GameManager extends Component {
                 // 跳到了坑上
                 this.curState = GameState.GS_INIT;
             }
-        }else {
+        } else {
             // 超过了最大长度
             this.curState = GameState.GS_INIT;
         }
@@ -116,11 +116,11 @@ export class GameManager extends Component {
         this._road = []
         // 确保游戏运行时，人物一定站在实路上
         this._road.push(BlockType.BT_STONE);
-        
+
         // 确保好每一格赛道类型
         for (let i = 1; i < this.roadLength; i++) {
             // 如果上一格是坑，那么这一格一定不能为坑
-            if (this._road[i-1] === BlockType.BT_NONE) {
+            if (this._road[i - 1] === BlockType.BT_NONE) {
                 this._road.push(BlockType.BT_STONE);
             } else {
                 let t = Math.floor(Math.random() * 2);
@@ -145,7 +145,7 @@ export class GameManager extends Component {
         }
         let block: Node | null = null;
         // 赛道类型为实路才生成
-        switch(type) {
+        switch (type) {
             case BlockType.BT_STONE:
                 block = instantiate(this.cubePrfb);
                 break;
@@ -154,7 +154,7 @@ export class GameManager extends Component {
     }
 
     // update(deltaTime: number) {
-        
+
     // }
 }
 

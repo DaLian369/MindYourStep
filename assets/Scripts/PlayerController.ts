@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec3, input, Input, EventMouse, Animation, SkeletalAnimation} from 'cc';
+import { _decorator, Component, Node, Vec3, input, Input, EventMouse, Animation, SkeletalAnimation } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('PlayerController')
@@ -6,8 +6,8 @@ export class PlayerController extends Component {
 
     // @property({type: Animation})
     // public BodyAnim: Animation | null = null;
-    @property({type: SkeletalAnimation})
-    public CocosAnim: SkeletalAnimation| null = null;
+    @property({ type: SkeletalAnimation })
+    public CocosAnim: SkeletalAnimation | null = null;
 
 
     // 是否接受到跳跃指令
@@ -23,7 +23,7 @@ export class PlayerController extends Component {
     // 当前角色位置
     private _curPos: Vec3 = new Vec3();
     // 每次跳跃过程中，当前帧移动位置差
-    private _deltaPos: Vec3 = new Vec3(0,0,0);
+    private _deltaPos: Vec3 = new Vec3(0, 0, 0);
     // 角色目标位置
     private _targetPos: Vec3 = new Vec3();
     // 所走步数
@@ -32,7 +32,7 @@ export class PlayerController extends Component {
     start() {
         // input.on(Input.EventType.MOUSE_UP, this.onMouseUp, this);
     }
-    
+
     reset() {
         this._curMoveIndex = 0;
     }
@@ -50,7 +50,7 @@ export class PlayerController extends Component {
         if (event.getButton() === 0) {
             // 跳1
             this.jumpByStep(1);
-        }else if (event.getButton() === 2) {
+        } else if (event.getButton() === 2) {
             // 跳2
             this.jumpByStep(2);
         }
@@ -96,7 +96,7 @@ export class PlayerController extends Component {
                 this._startJump = false;
                 // 每次跳跃结束发出消息
                 this.onOnceJumpEnd();
-            }else {
+            } else {
                 this.node.getPosition(this._curPos);
                 this._deltaPos.x = this._curJumpSpeed * deltaTime;
                 Vec3.add(this._curPos, this._curPos, this._deltaPos);
